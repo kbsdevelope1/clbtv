@@ -19,7 +19,6 @@ class Api::V1::EpgController < ApplicationController
     def playlists(data,start_date,end_date)
       schedules = data["playlist"]["schedule"]
       assets = data["playlist"]["sources"]
-      binding.pry
       filtered_schedules = schedules.select { |a| a["starts_at"].between?(start_date, end_date)}
       filtered_schedules.each do |child|
         child["url"] = child["source"]? assets.select{|a|  a["id"] == child["source"]}[0]["url"] :nil
